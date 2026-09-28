@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { ApiError } from "@repo/sdk/client";
 import { connectionInput, deployment, page, project, setupConnections, token } from "./helpers";
 import { listProjects, resolveDeployment, resolveProject } from "../src/targets";
 import { errorMessage } from "../src/errors";
@@ -124,4 +125,29 @@ describe("connections and target identity", () => {
       "Server rejected [redacted token]",
     );
   });
+
+  it("preserves deployment preflight failures returned with HTTP 403", () => {
+    const reason =
+      "Pre-deploy checks failed: Build configuration: Missing required fields: build image";
+    const error = new ApiError(reason, 403, {
+      error: reason,
+      code: "PRE_DEPLOY_CHECKS_FAILED",
+    });
+    expect(errorMessage(error)).toBe(reason);
+  });
+
+  it("redacts tokens in permission rejection details", () => {
+    expect(errorMessage(new ApiError(`Access denied for ${token}`, 403, null))).toBe(
+      "Access denied for [redacted token]",
+    );
+  });
+
+  it.each(["Forbidden", "API error: 403", ""])(
+    "offers permission guidance for a generic 403 response: %s",
+    (message) => {
+      expect(errorMessage(new ApiError(message, 403, null))).toBe(
+        "This token cannot perform that operation. Check its permissions and the selected organization.",
+      );
+    },
+  );
 });

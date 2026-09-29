@@ -20,6 +20,7 @@
   },
   "connect": {
     "connectGithub": "Conectar GitHub",
+    "deployApp": "Desplegar aplicación",
     "manageInSettings": "Gestionar en Ajustes",
     "terminal": {
       "title": "Conectar GitHub",

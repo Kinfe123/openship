@@ -2,7 +2,7 @@
 
 import { Icon as UiIcon, type IconName } from "@repo/ui/icons";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useGitHub } from "@/context/GitHubContext";
 import { usePlatform } from "@/context/PlatformContext";
 import { useCloud } from "@/context/CloudContext";
@@ -64,6 +64,7 @@ export default function LibraryPage() {
   // the connect prompt (a fine call-to-action); the Folder/URL/Template tabs
   // are one click away for local/self-hosted deploys.
   const [activeTab, setActiveTab] = useState<Tab>("repositories");
+  const appsTabRef = useRef<HTMLButtonElement>(null);
   const [showMigrate, setShowMigrate] = useState(false);
 
   // First-run consent before the gh-CLI source lists repos. The gh path runs
@@ -125,6 +126,8 @@ export default function LibraryPage() {
           return (
             <button
               key={tab.key}
+              ref={tab.key === "apps" ? appsTabRef : undefined}
+              aria-pressed={activeTab === tab.key}
               onClick={() => setActiveTab(tab.key)}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                 activeTab === tab.key
@@ -190,6 +193,10 @@ export default function LibraryPage() {
               onConnect={connect}
               cliAction={cliAction}
               onRefresh={refresh}
+              onBrowseApps={() => {
+                setActiveTab("apps");
+                appsTabRef.current?.focus();
+              }}
               selfHosted={selfHosted}
             />
           ) : needsGhCliConsent ? (

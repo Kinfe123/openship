@@ -20,6 +20,7 @@
   },
   "connect": {
     "connectGithub": "连接 GitHub",
+    "deployApp": "部署应用",
     "manageInSettings": "在设置中管理",
     "terminal": {
       "title": "连接 GitHub",

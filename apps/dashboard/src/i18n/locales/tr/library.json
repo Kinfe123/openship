@@ -11,6 +11,7 @@
   },
   "connect": {
     "connectGithub": "GitHub'a Bağlan",
+    "deployApp": "Uygulama dağıt",
     "manageInSettings": "Ayarlarda Yönet",
     "terminal": {
       "title": "GitHub'a Bağlan",

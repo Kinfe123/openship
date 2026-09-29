@@ -20,6 +20,7 @@
   },
   "connect": {
     "connectGithub": "GitHub に接続",
+    "deployApp": "アプリをデプロイ",
     "manageInSettings": "設定で管理",
     "terminal": {
       "title": "GitHub に接続",

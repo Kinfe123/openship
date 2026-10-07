@@ -1,0 +1,86 @@
+---
+title: Supported stacks
+description: Every framework, language, and runtime Openship detects automatically, with the `framework` value to use in openship.json when you want to pin one.
+---
+
+Openship looks at your repo when you import it and picks a stack automatically. It checks
+package dependencies and well-known config files, then fills in the build command, start command,
+port, and output directory for you in the [deploy wizard](/docs/guides/deploy-from-github).
+
+If detection picks the wrong stack, or you want to pin it, set `framework` in
+[`openship.json`](/docs/reference/openship-json) to one of the values below:
+
+```json
+{
+  "$schema": "https://openship.io/openship.schema.json",
+  "framework": "nextjs"
+}
+```
+
+The tables list the main signals for each stack. Some stacks match more files than shown.
+
+## Full-stack frameworks
+
+| Stack | `framework` | Dependency | Config file |
+| --- | --- | --- | --- |
+| Next.js | `nextjs` | `next` | `next.config.js`, `next.config.mjs`, … |
+| Farm.js | `farmjs` | `@farm.js/core`, `@farm.js/cli` | `farm.config.ts`, `farm.config.tsx`, … |
+| Nuxt | `nuxt` | `nuxt`, `@nuxt/core` | `nuxt.config.js`, `nuxt.config.ts`, … |
+| SvelteKit | `sveltekit` | `svelte`, `@sveltejs/kit` | `svelte.config.js`, `svelte.config.mjs` |
+| Remix | `remix` | `@remix-run/react`, `@remix-run/node`, … | `remix.config.js`, `remix.config.ts` |
+| TanStack Start | `tanstack-start` | `@tanstack/react-start`, `@tanstack/start` | `app.config.ts`, `app.config.js`, … |
+| AdonisJS | `adonis` | `@adonisjs/core` | `ace.js`, `.adonisrc.json`, … |
+| Django | `django` | – | `manage.py` |
+| Ruby on Rails | `rails` | – | `Gemfile`, `bin/rails`, … |
+| Laravel | `laravel` | `laravel/framework` | `artisan`, `composer.json` |
+| Symfony | `symfony` | `symfony/framework-bundle` | `composer.json`, `symfony.lock` |
+| Phoenix | `phoenix` | `phoenix` | `mix.exs` |
+
+## Frontend frameworks
+
+| Stack | `framework` | Dependency | Config file |
+| --- | --- | --- | --- |
+| Astro | `astro` | `astro` | `astro.config.mjs`, `astro.config.js`, … |
+| Vite | `vite` | `vite` | `vite.config.js`, `vite.config.ts`, … |
+| Angular | `angular` | `@angular/core` | `angular.json` |
+| Gatsby | `gatsby` | `gatsby` | `gatsby-config.js`, `gatsby-config.ts` |
+| Create React App | `cra` | `react-scripts` | – |
+| Vue CLI | `vue` | `vue` | `vue.config.js`, `vue.config.ts` |
+| React | `react` | – | – |
+
+## Backend frameworks and runtimes
+
+| Stack | `framework` | Dependency | Config file |
+| --- | --- | --- | --- |
+| Express | `express` | `express` | – |
+| Fastify | `fastify` | `fastify` | – |
+| Hono | `hono` | `hono` | – |
+| NestJS | `nestjs` | `@nestjs/core` | `nest-cli.json` |
+| Koa | `koa` | `koa` | – |
+| Elysia | `elysia` | `elysia` | – |
+| Go | `go` | – | `go.mod` |
+| Gin | `gin` | `github.com/gin-gonic/gin` | `go.mod` |
+| Fiber | `fiber` | `github.com/gofiber/fiber` | `go.mod` |
+| Echo | `echo` | `github.com/labstack/echo` | `go.mod` |
+| Rust | `rust` | – | `Cargo.toml` |
+| Actix Web | `actix` | `actix-web` | `Cargo.toml` |
+| Axum | `axum` | `axum` | `Cargo.toml` |
+| Rocket | `rocket` | `rocket` | `Cargo.toml` |
+| Python | `python` | – | `requirements.txt`, `pyproject.toml`, … |
+| Flask | `flask` | `flask`, `Flask` | `requirements.txt`, `pyproject.toml`, … |
+| FastAPI | `fastapi` | `fastapi`, `FastAPI` | `requirements.txt`, `pyproject.toml`, … |
+| Sinatra | `sinatra` | `sinatra` | `Gemfile` |
+| Spring Boot | `springboot` | `org.springframework.boot:spring-boot-starter-web`, `spring-boot` | `pom.xml`, `build.gradle`, … |
+| Quarkus | `quarkus` | `io.quarkus:quarkus-core`, `quarkus` | `pom.xml`, `build.gradle`, … |
+| Kotlin | `kotlin` | – | `build.gradle.kts`, `build.gradle` |
+| .NET | `dotnet` | – | – |
+| Node.js | `node` | – | `package.json` |
+
+## Static sites and containers
+
+| Stack | `framework` | Dependency | Config file |
+| --- | --- | --- | --- |
+| Blazor | `blazor` | `Microsoft.AspNetCore.Components.WebAssembly` | – |
+| Static Site | `static` | – | `index.html` |
+| Dockerfile | `docker` | – | `Dockerfile` |
+| Docker Compose | `docker-compose` | – | `docker-compose.yml`, `docker-compose.yaml`, … |
